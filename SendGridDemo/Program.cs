@@ -17,11 +17,11 @@ namespace SendGridDemo
         {
             try
             {
-                var apiKey = "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";
+                var apiKey = "";
                 var client = new SendGridClient(apiKey);
                 var msg = new SendGridMessage()
                 {
-                    From = new EmailAddress("7deividmladenov007@gmail.com", "Deivid Mladenov Demo"),
+                    From = new EmailAddress("test@mail.com", "test"),
                     Subject = "Testing the SendGrid C# Library by Deivid Mladenov",
                     PlainTextContent = "Hello, Email!",
                     HtmlContent = "<strong>Hello, Email!</strong>"
@@ -32,7 +32,13 @@ namespace SendGridDemo
                 {
                     new EmailAddress("7deividmladenov007@gmail.com", "Deivid Mladenov")
                 };
+
                 msg.AddTos(recipients);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    await client.SendEmailAsync(msg);
+                }
 
                 var response = await client.SendEmailAsync(msg);
 
